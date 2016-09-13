@@ -1,0 +1,80 @@
+/*.bg {
+  background: url('/assets/example/bg_blueplane.jpg') no-repeat center center;
+  position: fixed;
+  width: 100%;
+  height: 350px; /*same height as jumbotron */
+/*  top:0;
+  left:0;
+  z-index: -1;
+}*/
+
+/*.jumbotron {
+  margin-bottom: 0px;
+  height: 350px;
+  color: white;
+  text-shadow: black 0.3em 0.3em 0.3em;
+  background:transparent;
+}*/
+
+.h1font{
+font-family: 'Alex Brush', cursive;
+color: #B21792 !important;
+}
+
+.gallery{
+color: #B21792 !important;
+}
+
+.btn{
+	margin: 25px;
+}
+
+body{
+	padding-top: 40px;
+}
+
+h3{
+  color: #B21792 !important;
+}
+
+#pic{
+  background: url("../images/25900655562_df21f84bbc_z.jpg") no-repeat center center;
+  min-height: 550px;
+  padding 10px
+  width:60%;
+  position:relative;
+}
+
+
+
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+#circle-shape-example { 
+  font-family: Open Sans, sans-serif; 
+  margin: 2rem; 
+}
+#circle-shape-example p { 
+  line-height: 1.8; 
+}
+#circle-shape-example .curve { 
+  width: 20%; height: auto;
+  min-width: 110px;
+  float: left;
+  margin-right:3rem; 
+  border-radius: 50%;
+  -webkit-shape-outside:circle();
+  shape-outside:circle();
+}
+
+.textarea{
+	margin:15px, 12px;
+	padding: 18px;
+	width: calc(95% -55px);
+	font-size: 1.5em;
+}
+
+
+
+
+
+
