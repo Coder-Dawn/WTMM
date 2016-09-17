@@ -4,7 +4,11 @@
 // These data sources hold arrays of information on all possible friends
 // ===============================================================================
 
+var fs = require('fs'); 
 var mentors 		= require('../data/fptest.js');
+
+
+
 
 
 // ===============================================================================
@@ -60,7 +64,7 @@ module.exports = function(app){
 		// Here we loop through all the mentor possibilities in the database. 
 		for  (var i=0; i< mentors.length; i++) {
 
-			console.log(mentors[i].name);
+			//console.log(mentors[i].name);
 			totalDifference = 0;
 
 			// We then loop through all the scores of each mentor
@@ -68,10 +72,10 @@ module.exports = function(app){
 
 				// We calculate the difference between the scores and sum them into the totalDifference
 				totalDifference += Math.abs(parseInt(userScores[j]) - parseInt(mentors[i].scores[j]));
-
+				console.log(totalDifference);
 				// If the sum of differences is less then the differences of the current "best match"
-				if (totalDifference <= bestMatch.friendDifference){
-
+				if (totalDifference <= bestMatch.mentorDifference){
+					console.log(bestMatch);
 					// Reset the bestMatch to be the new mentor. 
 					bestMatch.name = mentors[i].name;
 					bestMatch.photo = mentors[i].photo;
@@ -89,4 +93,57 @@ module.exports = function(app){
 
 	});
 
+	app.post('/newUser', function(req, res){
+		var newUserDetails = req.body;
+
+		//use fs.write node module to write new users onto the fptest.js
+
+		fs.writeFile("fptest.js",function(err) {
+    
+	// If the code experiences any errors it will log the error to the console. 
+    if(err) {
+        return console.log(err);
+    }
+
+    // Otherwise, it will print: "user database was updated!"
+    console.log("user database was updated!");
+}); 
+
+
+
+
+	});
+
+	app.post('/login', function(req, res){
+		var userLoginInfo = req.body;
+		var currentUser;
+
+		for (var i = 0; i < mentors.length; i++) {
+			if (mentors[i].name == userLoginInfo.name && mentors[i].password == userLoginInfo.password) {
+				currentUser = mentors[i];
+			}
+		}
+		res.send(currentUser);
+
+	});
+
+	app.post('/surveyTaken', function(req, res){
+		var surveyResults = req.body.results;
+		var user = req.body.user;
+
+		//fs.write the info below to the fptest.js file
+		var currentUser = getCurrentUser(user);
+		mentors[currentUser.index].scores = surveyResults;
+
+
+	});
+
+	function getCurrentUser(sentUser){
+		mentors.forEach(function(user, index){
+			if (user.name == sentUser.name) {
+				user.index = index;
+				return user;
+			}
+		});
+	}
 }
